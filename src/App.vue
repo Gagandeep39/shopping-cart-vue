@@ -14,27 +14,6 @@ export default {
   components: {
     TheHeader,
   },
-  data() {
-    return {
-      isLoggedIn: false,
-      cart: { items: [], total: 0, qty: 0 },
-    };
-  },
-  provide() {
-    return {
-      isLoggedIn: this.isLoggedIn,
-      login: this.login,
-      logout: this.logout,
-    };
-  },
-  methods: {
-    login() {
-      this.isLoggedIn = true;
-    },
-    logout() {
-      this.isLoggedIn = false;
-    },
-  },
 };
 </script>
 
