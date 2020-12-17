@@ -3,7 +3,6 @@ import cartModule from './modules/cart';
 import productsModule from './modules/products';
 
 export default createStore({
-  namespaced: true,
   state() {
     return {};
   },
