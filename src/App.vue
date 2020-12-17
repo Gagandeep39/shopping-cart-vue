@@ -1,30 +1,118 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <the-header></the-header>
+  <router-view></router-view>
 </template>
 
+<script>
+import TheHeader from './components/nav/TheHeader.vue';
+
+export default {
+  components: {
+    TheHeader,
+  },
+  data() {
+    return {
+      isLoggedIn: false,
+      products: [
+        {
+          id: 'p1',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Mexican_guitars_and_toys.jpg/1280px-Mexican_guitars_and_toys.jpg',
+          title: 'Toys',
+          description: 'A collection of tooks. Guitars and other toys',
+          price: 99.99,
+        },
+        {
+          id: 'p2',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Game-Gear-Handheld.jpg/1280px-Game-Gear-Handheld.jpg',
+          title: 'Gaming Console',
+          description: 'A Video game console',
+          price: 129.99,
+        },
+        {
+          id: 'p3',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/640px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+          title: 'Food Box',
+          description:
+            'May be partially expired when it arrives but at least it is cheap!',
+          price: 6.99,
+        },
+        {
+          id: 'p4',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/1/1b/Violin_VL100.png',
+          title: 'Violin',
+          description: 'A music Instrument',
+          price: 99.99,
+        },
+      ],
+      cart: { items: [], total: 0, qty: 0 },
+    };
+  },
+  provide() {
+    return {
+      isLoggedIn: this.isLoggedIn,
+      products: this.products,
+      cart: this.cart,
+      addProductToCart: this.addProductToCart,
+      removeProductFromCart: this.removeProductFromCart,
+      login: this.login,
+      logout: this.logout,
+    };
+  },
+  methods: {
+    addProductToCart(productData) {
+      const productInCartIndex = this.cart.items.findIndex(
+        (ci) => ci.productId === productData.id
+      );
+
+      if (productInCartIndex >= 0) {
+        this.cart.items[productInCartIndex].qty++;
+      } else {
+        const newItem = {
+          productId: productData.id,
+          title: productData.title,
+          image: productData.image,
+          price: productData.price,
+          qty: 1,
+        };
+        this.cart.items.push(newItem);
+      }
+      this.cart.qty++;
+      this.cart.total += productData.price;
+    },
+
+    removeProductFromCart(prodId) {
+      const productInCartIndex = this.cart.items.findIndex(
+        (cartItem) => cartItem.productId === prodId
+      );
+      const prodData = this.cart.items[productInCartIndex];
+      this.cart.items.splice(productInCartIndex, 1);
+      this.cart.qty -= prodData.qty;
+      this.cart.total -= prodData.price * prodData.qty;
+    },
+    login() {
+      this.isLoggedIn = true;
+    },
+    logout() {
+      this.isLoggedIn = false;
+    },
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  box-sizing: border-box;
 }
 
-#nav {
-  padding: 30px;
+html {
+  font-family: sans-serif;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+body {
+  margin: 0;
 }
 </style>
