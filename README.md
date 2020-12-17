@@ -1,24 +1,28 @@
-# shopping-cart-vue
+# Shopping Cart
 
-## Project setup
-```
-yarn install
-```
+- [Shopping Cart](#shopping-cart)
+  - [Deployment](#deployment)
+  - [Local deployment](#local-deployment)
+  - [Description](#description)
+  - [Packages](#packages)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Deployment
 
-### Compiles and minifies for production
-```
-yarn build
-```
+- CHeckout deployment at <https://gagandeep39.github.io/shopping-cart-vue/>
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Local deployment
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. Open VS code
+2. Make sure you are in root directory
+3. `yarn` Install dependency
+4. `yarn serve` Run the project
+
+## Description
+
+- A Vue application
+- It uses concepts such as `routing`, `vuex`
+
+## Packages
+
+- vuex `yarn add vuex`, `npm install --save vuex`
+- vue-router `yarn add vue-router@next`, `npm install --save vue-router@next`
