@@ -4,10 +4,32 @@ import productsModule from './modules/products';
 
 export default createStore({
   state() {
-    return {};
+    return {
+      isLoggedIn: false,
+    };
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    login(state) {
+      state.isLoggedIn = true;
+    },
+    logout(state) {
+      state.isLoggedIn = false;
+    },
+  },
+  actions: {
+    login(context) {
+      context.commit('login');
+    },
+    logout(context) {
+      context.commit('logout');
+    },
+  },
+  getters: {
+    isAuthenticated(state) {
+      return state.isLoggedIn;
+    },
+  },
+
   modules: {
     cart: cartModule,
     products: productsModule,
